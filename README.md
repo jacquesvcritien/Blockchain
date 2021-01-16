@@ -73,6 +73,6 @@ After running <b>truffle init</b>, one should find a file named <b>truffle-confi
 
 <b>truffle develop</b> uses Mocha for tests, whose documentation can be found at https://mochajs.org/.
 
-#### 4.2 Chain
+#### 4.2 Chai
 
 <b>truffle develop</b> uses Chai for assertions, whose documentation can be found at https://www.chaijs.com/api/assert/ .
