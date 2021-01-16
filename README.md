@@ -67,6 +67,14 @@ Check out https://www.trufflesuite.com/docs/truffle/reference/configuration#reso
 
 After running <b>truffle init</b>, one should find a file named <b>truffle-config.json</b>. Change the version under compilers > solc to <b>0.6.6</b>.
 
+```javascript
+compilers: {
+    solc: {
+      version: "0.6.6"
+    },
+  }
+```
+
 ## 4. Testing
 
 #### 4.1 Mocha
@@ -76,3 +84,54 @@ After running <b>truffle init</b>, one should find a file named <b>truffle-confi
 #### 4.2 Chai
 
 <b>truffle develop</b> uses Chai for assertions, whose documentation can be found at https://www.chaijs.com/api/assert/ .
+
+## 5. Deploying Smart Contract To Rinkeby Network
+
+To deploy a smart contract once can use a public node.
+
+#### 5.1 Infura
+
+1. Go to infura.io
+2. Sign Up
+3. Create new project
+4. Get the endpoint from the project's settings under KEYS. <b>Make sure Rinkeby is selected in the selectbox near ENDPOINTS</b>
+
+#### 5.2 Setup
+
+1. Go into the directory of the newly created project(locally not on Infura)
+2. Run <b>npm install @truffle/hdwallet-provider</b> or <b>npm install truffle-hdwallet-provider </b> for older versions.
+3. Open <b>truffle-config.js</b>
+4. Get the mnemonic/seed from the MetaMask setting (Click top-right circle > settings > Security & Privacy > Reveal Seed Phrase). This should be like a long phrase with different words making no sense. 
+5. Make sure the truffle-config.js file looks like this:
+```javascript
+const metaMaskMnemonic = "seed obtained from metamask's settings";
+
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+
+module.exports = {
+  networks: {
+    rinkeby: {
+      network_id: 4,
+      provider: new HDWalletProvider(metaMaskMnemonic, "endpoint obtained from infura's settings")
+    }
+  },
+
+  // Set default mocha options here, use special reporters etc.
+  mocha: {
+    // timeout: 100000
+  },
+
+  // Configure your compilers
+  compilers: {
+    solc: {
+      version: "0.6.6"
+    },
+  },
+};
+```
+6. Run <b>truffle migrate --network rinkeby</b>
+
+
+#### 5.3 Checking Deployment
+
+The migrate command should return a contract address and this can be checked by going into  https://rinkeby.etherscan.io/ and pasting the address there. 
