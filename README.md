@@ -135,3 +135,7 @@ module.exports = {
 #### 5.3 Checking Deployment
 
 The migrate command should return a contract address and this can be checked by going into  https://rinkeby.etherscan.io/ and pasting the address there. 
+
+## 6. Online IDE
+
+If you wish to test smart contracts quickly, one can also make use of an online IDE which can be found in this link, https://remix.ethereum.org/.
